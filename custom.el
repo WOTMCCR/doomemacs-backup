@@ -62,6 +62,7 @@
 
 ;; overrides mark-whole-buffer
 ;; Unbind C-h from help-command
+
 (global-unset-key (kbd "C-h"))
 
 ;; Bind C-h to backward-delete-char
@@ -75,3 +76,5 @@
 
 ;; Enable next-line-add-newlines
 (setq next-line-add-newlines t)
+
+(add-hook 'vterm-mode-hook (lambda () (setq buffer-read-only nil)))
