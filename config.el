@@ -74,3 +74,15 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(use-package! slime
+  :defer t ; don't load the package immediately
+  :init ; runs this immediately
+  (setq inferior-lisp-program "sbcl")
+  :config ; runs this when slime loads
+  (set-repl-handler! 'lisp-mode #'sly-mrepl)
+  (set-eval-handler! 'lisp-mode #'sly-eval-region)
+  (set-lookup-handlers! 'lisp-mode
+    :definition #'sly-edit-definition
+    :documentation #'sly-describe-symbol)
+
+  (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode))
